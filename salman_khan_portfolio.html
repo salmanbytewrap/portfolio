@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salman Khan — Backend Engineer &amp; Tech Lead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --bg-panel:#12181F;
+    --bg-panel-2:#171F27;
+    --border:#232C36;
+    --border-soft:#1B232C;
+    --text:#E7ECF2;
+    --text-muted:#8B96A5;
+    --text-dim:#586373;
+    --amber:#FFB020;
+    --teal:#38BDF8;
+    --green:#34D399;
+    --red:#FB7185;
+    --radius:10px;
+    --maxw:1040px;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(56,189,248,0.06), transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(255,176,32,0.05), transparent 40%);
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  ::selection{background:var(--amber); color:#0B0F14;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,15,20,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:60px;
+  }
+  .nav-logo{
+    font-family:var(--font-mono); font-size:14px; font-weight:600;
+    display:flex; align-items:center; gap:8px; color:var(--text);
+  }
+  .nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--green); box-shadow:0 0 8px var(--green);}
+  .nav-links{display:flex; gap:28px; font-family:var(--font-mono); font-size:13px; color:var(--text-muted);}
+  .nav-links a{transition:color .15s ease;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--teal);}
+  .nav-cta{
+    font-family:var(--font-mono); font-size:12px; padding:8px 14px;
+    border:1px solid var(--border); border-radius:6px; color:var(--text);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .nav-cta:hover, .nav-cta:focus-visible{border-color:var(--amber); color:var(--amber);}
+  @media (max-width:720px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:88px 0 64px;}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em;
+    color:var(--text-dim); text-transform:uppercase; margin-bottom:18px;
+  }
+  h1.name{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+    line-height:1.04; letter-spacing:-0.02em;
+    margin-bottom:14px;
+  }
+  h1.name .accent{color:var(--teal);}
+  .role-line{
+    font-family:var(--font-body); font-size:clamp(1.05rem,2.4vw,1.3rem);
+    color:var(--text-muted); max-width:620px; margin-bottom:36px;
+  }
+  .role-line strong{color:var(--text); font-weight:600;}
+
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:56px;}
+  .btn{
+    font-family:var(--font-mono); font-size:13px; padding:12px 20px;
+    border-radius:7px; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn-primary{background:var(--amber); color:#1A1200; font-weight:600;}
+  .btn-primary:hover, .btn-primary:focus-visible{transform:translateY(-1px); box-shadow:0 8px 24px rgba(255,176,32,0.25);}
+  .btn-ghost{border:1px solid var(--border); color:var(--text);}
+  .btn-ghost:hover, .btn-ghost:focus-visible{border-color:var(--teal); color:var(--teal); transform:translateY(-1px);}
+
+  /* ---------- STATUS PANEL (signature element) ---------- */
+  .status-card{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .status-card-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 16px; border-bottom:1px solid var(--border-soft);
+    background:var(--bg-panel-2);
+  }
+  .status-card-head .traffic{display:flex; gap:6px;}
+  .status-card-head .traffic span{width:9px;height:9px;border-radius:50%;display:block;}
+  .traffic span:nth-child(1){background:#4A5563;}
+  .traffic span:nth-child(2){background:#4A5563;}
+  .traffic span:nth-child(3){background:#4A5563;}
+  .status-card-head .route{
+    font-family:var(--font-mono); font-size:12px; color:var(--text-muted);
+  }
+  .status-card-body{padding:22px 24px 24px;}
+  .status-row{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:20px 24px;
+  }
+  .status-item .label{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em;
+    color:var(--text-dim); text-transform:uppercase; margin-bottom:6px;
+  }
+  .status-item .value{
+    font-family:var(--font-mono); font-size:20px; font-weight:600; color:var(--text);
+  }
+  .status-item .value.ok{color:var(--green);}
+  .status-item .value .pulse{
+    display:inline-block; width:8px; height:8px; border-radius:50%;
+    background:var(--green); margin-right:8px; position:relative; top:-1px;
+    animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(52,211,153,0.55);}
+    70%{box-shadow:0 0 0 9px rgba(52,211,153,0);}
+    100%{box-shadow:0 0 0 0 rgba(52,211,153,0);}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:36px;}
+  .section-tag{
+    font-family:var(--font-mono); font-size:12px; color:var(--teal);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;
+  }
+  h2.section-title{
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(1.5rem,3vw,2rem); letter-spacing:-0.01em;
+  }
+  .section-sub{color:var(--text-muted); max-width:600px; margin-top:10px;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- METRICS ---------- */
+  .metrics-strip{
+    border-top:1px solid var(--border-soft);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .metrics-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px; background:var(--border-soft);
+  }
+  .metric{background:var(--bg); padding:28px 20px;}
+  .metric .num{
+    font-family:var(--font-mono); font-weight:700;
+    font-size:clamp(1.6rem,3vw,2.1rem); color:var(--amber);
+  }
+  .metric .num.teal{color:var(--teal);}
+  .metric .desc{color:var(--text-muted); font-size:13px; margin-top:6px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:48px;}
+  .about-grid p{color:var(--text-muted); margin-bottom:16px;}
+  .about-grid p strong{color:var(--text); font-weight:600;}
+  .stack-list{
+    font-family:var(--font-mono); font-size:13px;
+    background:var(--bg-panel); border:1px solid var(--border);
+    border-radius:var(--radius); padding:20px;
+  }
+  .stack-list .stack-group{margin-bottom:14px;}
+  .stack-list .stack-group:last-child{margin-bottom:0;}
+  .stack-list .stack-label{color:var(--text-dim); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;}
+  .stack-list .stack-vals{color:var(--text-muted);}
+  .stack-list .stack-vals span{color:var(--text);}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .timeline{border-left:1px solid var(--border); margin-left:6px;}
+  .tl-item{position:relative; padding:0 0 40px 28px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:attr(data-n);
+    font-family:var(--font-mono); font-size:11px; color:var(--bg);
+    position:absolute; left:-13px; top:2px;
+    width:24px; height:24px; border-radius:50%;
+    background:var(--teal); display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+  }
+  .tl-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 14px; margin-bottom:6px;}
+  .tl-role{font-family:var(--font-display); font-weight:600; font-size:1.05rem;}
+  .tl-company{color:var(--teal); font-size:0.95rem;}
+  .tl-date{font-family:var(--font-mono); font-size:12px; color:var(--text-dim); margin-left:auto;}
+  .tl-bullets{color:var(--text-muted); font-size:14.5px;}
+  .tl-bullets li{margin-bottom:6px; margin-left:18px;}
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px;}
+  .proj-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px; transition:border-color .2s ease, transform .2s ease;
+  }
+  .proj-card:hover{border-color:var(--teal); transform:translateY(-3px);}
+  .proj-card .proj-title{font-family:var(--font-display); font-weight:600; font-size:1.05rem; margin-bottom:8px;}
+  .proj-card .proj-desc{color:var(--text-muted); font-size:14px; margin-bottom:14px;}
+  .proj-card .proj-impact{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--amber);
+    border-top:1px solid var(--border-soft); padding-top:12px; margin-bottom:12px;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:6px;}
+  .chip{
+    font-family:var(--font-mono); font-size:11px; color:var(--text-muted);
+    border:1px solid var(--border-soft); border-radius:5px; padding:3px 8px;
+  }
+
+  /* ---------- CERTS ---------- */
+  .cert-list{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px;}
+  .cert-item{
+    display:flex; align-items:center; gap:12px;
+    background:var(--bg-panel); border:1px solid var(--border-soft); border-radius:8px;
+    padding:14px 16px; font-size:14px; color:var(--text-muted);
+  }
+  .cert-item .ico{color:var(--green); font-family:var(--font-mono); font-size:14px;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{border-top:1px solid var(--border-soft); padding:70px 0 40px;}
+  .contact-panel{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:44px 36px; text-align:center; margin-bottom:40px;
+  }
+  .contact-panel h2{font-family:var(--font-display); font-size:clamp(1.5rem,3vw,2rem); margin-bottom:12px;}
+  .contact-panel p{color:var(--text-muted); max-width:480px; margin:0 auto 26px;}
+  .contact-actions{display:flex; justify-content:center; gap:12px; flex-wrap:wrap;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:var(--font-mono); font-size:12px; color:var(--text-dim);
+  }
+
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-logo"><span class="dot"></span> salman.khan</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Backend Engineering / Tech Lead Portfolio</div>
+    <h1 class="name">Salman Khan<br><span class="accent">builds backend systems</span> that stay up.</h1>
+    <p class="role-line">
+      Senior Software Engineer &amp; Tech Lead with <strong>9 years</strong> of experience architecting
+      Node.js &amp; TypeScript backends for fintech, insurtech, and SaaS platforms — currently shipping
+      AI-powered product features at Daxko.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#contact">Get in touch →</a>
+      <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">Download resume ↓</a>
+      <a class="btn btn-ghost" href="#experience">View experience</a>
+    </div>
+
+    <div class="status-card reveal">
+      <div class="status-card-head">
+        <span class="route">GET /salman-khan/availability</span>
+        <div class="traffic"><span></span><span></span><span></span></div>
+      </div>
+      <div class="status-card-body">
+        <div class="status-row">
+          <div class="status-item">
+            <div class="label">Status</div>
+            <div class="value ok"><span class="pulse"></span>Open to roles</div>
+          </div>
+          <div class="status-item">
+            <div class="label">Experience</div>
+            <div class="value">9y 0m</div>
+          </div>
+          <div class="status-item">
+            <div class="label">Avg. latency cut</div>
+            <div class="value">−60%</div>
+          </div>
+          <div class="status-item">
+            <div class="label">Location</div>
+            <div class="value" style="font-size:16px;">Noida, IN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="metrics-strip">
+  <div class="metrics-grid">
+    <div class="metric reveal"><div class="num">60%</div><div class="desc">API latency reduction</div></div>
+    <div class="metric reveal"><div class="num teal">40→75%</div><div class="desc">Test coverage raised</div></div>
+    <div class="metric reveal"><div class="num">40%</div><div class="desc">Retention lift from AI churn model</div></div>
+    <div class="metric reveal"><div class="num teal">12</div><div class="desc">Engineers led as Tech Lead</div></div>
+    <div class="metric reveal"><div class="num">3mo</div><div class="desc">5-insurer platform, concept to launch</div></div>
+    <div class="metric reveal"><div class="num teal">100K+</div><div class="desc">Users served in production</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">01 — About</div>
+      <h2 class="section-title">Nine years of turning fragile systems into reliable ones</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I've spent my career on the parts of the stack that aren't optional: <strong>payment processing, database migrations, and the APIs everything else depends on.</strong> Most of my best work has started with a system that was already fragile — an RxJS fintech backend, undocumented insurer APIs, a Firebase datastore that needed to move without anyone noticing — and ended with something that scales.</p>
+        <p>Recently that's extended into <strong>AI-powered features in production</strong>: an LLM-based churn-detection module at Daxko's SugarWOD platform that improved member retention by 40%, built with the same discipline I'd apply to a payments system — tested, monitored, and shipped incrementally.</p>
+        <p>I've operated as an individual contributor, a Tech Lead directing a 12-engineer team, and an acting Scrum Lead — I'm equally comfortable in the code and in the room where the architecture gets decided.</p>
+      </div>
+      <div class="stack-list reveal">
+        <div class="stack-group">
+          <div class="stack-label">Backend</div>
+          <div class="stack-vals"><span>Node.js</span>, <span>TypeScript</span>, NestJS, Express, REST, GraphQL</div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">Data</div>
+          <div class="stack-vals"><span>MongoDB</span>, <span>DynamoDB</span>, MySQL, Firebase</div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">Cloud</div>
+          <div class="stack-vals"><span>AWS Lambda</span>, API Gateway, S3, EC2, Serverless</div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">Reliability</div>
+          <div class="stack-vals"><span>Redis</span>, Bull Queue, Jest, CI/CD</div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">AI</div>
+          <div class="stack-vals"><span>LLM Integration</span>, Prompt Engineering</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">02 — Experience</div>
+      <h2 class="section-title">Career timeline</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal" data-n="1">
+        <div class="tl-head">
+          <span class="tl-role">Senior Engineer I · Acting Scrum Lead</span>
+          <span class="tl-company">Daxko — SugarWOD</span>
+          <span class="tl-date">Sep 2023 – Present</span>
+        </div>
+        <ul class="tl-bullets">
+          <li>Built an AI-powered churn-detection module using LLM APIs, improving member retention by 40%.</li>
+          <li>Cut API latency up to 60% via indexing, aggregation redesign, and Redis caching for 50,000+ active users.</li>
+          <li>Led a JavaScript → TypeScript migration across 15+ modules and raised test coverage from 40% to 75%.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal" data-n="2">
+        <div class="tl-head">
+          <span class="tl-role">Tech Lead / Senior Software Engineer</span>
+          <span class="tl-company">SundayLabs</span>
+          <span class="tl-date">Feb 2023 – Aug 2023</span>
+        </div>
+        <ul class="tl-bullets">
+          <li>Led 12 engineers to design, build, and launch a multi-insurer aggregation platform in 3 months.</li>
+          <li>Delivered 5 insurer integrations and built a serverless backend on AWS Lambda + DynamoDB.</li>
+          <li>Redesigned the DynamoDB key model, improving read performance by ~40%.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal" data-n="3">
+        <div class="tl-head">
+          <span class="tl-role">Senior Software Engineer</span>
+          <span class="tl-company">Bytewrap Technologies — Esusu</span>
+          <span class="tl-date">Jan 2019 – Feb 2023</span>
+        </div>
+        <ul class="tl-bullets">
+          <li>Re-architected a fintech backend from RxJS to Node.js/TypeScript for 100,000+ users.</li>
+          <li>Led a zero-downtime Firebase → MongoDB migration of 100,000+ records.</li>
+          <li>Cut query execution time up to 60% through indexing and denormalization.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal" data-n="4">
+        <div class="tl-head">
+          <span class="tl-role">Software Engineer</span>
+          <span class="tl-company">Innotical Solutions</span>
+          <span class="tl-date">Jan 2017 – Jan 2019</span>
+        </div>
+        <ul class="tl-bullets">
+          <li>Built and scaled Node.js/MongoDB backend services for web and mobile platforms.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">03 — Projects</div>
+      <h2 class="section-title">Featured work</h2>
+      <p class="section-sub">Built at my employers — proprietary codebases, so these are architecture summaries rather than public repos. Happy to walk through design decisions directly.</p>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-title">AI Churn Detection — SugarWOD</div>
+        <div class="proj-desc">LLM-based module analyzing member behavior to flag at-risk gym members and trigger personalized retention nudges.</div>
+        <div class="proj-impact">↑ Improved member retention by 40%</div>
+        <div class="chip-row"><span class="chip">Node.js</span><span class="chip">MongoDB</span><span class="chip">LLM APIs</span></div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-title">Gromo — Insurance Aggregation</div>
+        <div class="proj-desc">Microservices backend integrating 5 insurers through undocumented, legacy partner APIs.</div>
+        <div class="proj-impact">↑ 12-engineer team, 3-month launch</div>
+        <div class="chip-row"><span class="chip">Microservices</span><span class="chip">OAuth2</span><span class="chip">Node.js</span></div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-title">Growpital — Serverless Platform</div>
+        <div class="proj-desc">Fully serverless backend with auto-scaling and a redesigned DynamoDB key model.</div>
+        <div class="proj-impact">↑ 40% read performance, near-zero idle cost</div>
+        <div class="chip-row"><span class="chip">AWS Lambda</span><span class="chip">DynamoDB</span></div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-title">Esusu — Fintech Platform</div>
+        <div class="proj-desc">Savings, payments, and rent-reporting backend for 100,000+ users, including a zero-downtime data migration.</div>
+        <div class="proj-impact">↑ 60% faster queries, alert lag hours → seconds</div>
+        <div class="chip-row"><span class="chip">TypeScript</span><span class="chip">Redis</span><span class="chip">Socket.IO</span></div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-title">Visitor Management System</div>
+        <div class="proj-desc">Enterprise backend for check-in/out, host notifications, badge printing, and compliance reporting.</div>
+        <div class="proj-impact">↑ REST APIs for iOS, Android &amp; web</div>
+        <div class="chip-row"><span class="chip">Node.js</span><span class="chip">AWS S3</span><span class="chip">DynamoDB</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">04 — Certifications</div>
+      <h2 class="section-title">Credentials</h2>
+    </div>
+    <div class="cert-list">
+      <div class="cert-item reveal"><span class="ico">✓</span> MongoDB and the Document Model</div>
+      <div class="cert-item reveal"><span class="ico">✓</span> MongoDB Atlas</div>
+      <div class="cert-item reveal"><span class="ico">✓</span> ESET Cyber Security Awareness Training</div>
+      <div class="cert-item reveal"><span class="ico">✓</span> KnowBe4 Cybersecurity Awareness Training</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-panel reveal">
+      <h2>Let's build something reliable.</h2>
+      <p>Open to Tech Lead, Senior Backend Engineer, and Staff Engineer roles — particularly in fintech, insurtech, and AI-powered products.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:salman93618@gmail.com">salman93618@gmail.com</a>
+        <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">Download resume ↓</a>
+        <a class="btn btn-ghost" href="#">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Noida / Meerut, India</span>
+      <span>© 2026 Salman Khan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12});
+    els.forEach(el=>io.observe(el));
+  } else {
+    els.forEach(el=>el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
